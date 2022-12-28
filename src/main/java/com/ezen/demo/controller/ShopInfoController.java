@@ -24,12 +24,9 @@ public class ShopInfoController {
  */
 	@Autowired
 	private ShopInfoService shopInfoService;
-	@Autowired
-	private ShopInfoService shopInfoService1;
 
 	@GetMapping("/shop-infos")
 	public String getShopInfos(Model model,@ModelAttribute ShopInfoVO shopInfo){
-		log.info("shopInfoService == shopInfoService1 ==>{}", shopInfoService == shopInfoService1);
 		model.addAttribute("shopList", shopInfoService.getShopInfos(shopInfo));
 		return "views/shop-info/list";
 	}

@@ -19,4 +19,9 @@ public class BoardInfoController {
 		model.addAttribute("boardInfoList",boardInfoService.getBoardInfos(boardInfo));
 		return "views/board-info/list";
 	}
+	@GetMapping("/board-info")
+	public String getBoardInfo(@ModelAttribute BoardInfoVO boardInfo, Model model) {
+		model.addAttribute("boardInfo",boardInfoService.getBoardInfo(boardInfo));
+		return "views/board-info/view";
+	}
 }

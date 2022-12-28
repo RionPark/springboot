@@ -18,6 +18,7 @@ public class BoardInfoService {
 		return boardInfoMapper.selectBoardInfoList(boardInfo);
 	}
 	public BoardInfoVO getBoardInfo(BoardInfoVO boardInfo) {
+		boardInfoMapper.updateBoardInfoCnt(boardInfo.getBiNum());
 		return boardInfoMapper.selectBoardInfo(boardInfo);
 	}
 	public int insertBoardInfo(BoardInfoVO boardInfo) {

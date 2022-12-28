@@ -9,9 +9,9 @@
 </head>
 <body>
 <form action="/shop-infos">
-<input type="text" name="siName" placeholder="이름">
-<input type="text" name="siCode" placeholder="코드">
-<input type="text" name="siSupplier" placeholder="공급자">
+<input type="text" name="siName" placeholder="이름" value="${param.siName }">
+<input type="text" name="siCode" placeholder="코드" value="${param.siCode}">
+<input type="text" name="siSupplier" placeholder="공급자" value="${param.siSupplier}">
 <button>조회</button>
 </form>
 <table border="1">

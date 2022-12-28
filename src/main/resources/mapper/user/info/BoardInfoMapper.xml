@@ -50,6 +50,11 @@
 	BI_CNT=#{biCnt}
 	WHERE BI_NUM=#{biNum}
   </update>
+  <update id="updateBoardInfoCnt" parameterType="com.ezen.demo.vo.BoardInfoVO">
+	UPDATE BOARD_INFO
+	SET BI_CNT = BI_CNT + 1
+	WHERE BI_NUM=#{biNum}
+  </update>
   <delete id="deleteBoardInfo" > 
   	DELETE FROM BOARD_INFO WHERE BI_NUM=#{biNum}
   </delete>
