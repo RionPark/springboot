@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.demo.mapper.ShopInfoMapper">
+  <select id="selectShopInfoList" resultType="com.ezen.demo.vo.ShopInfoVO">
+    SELECT * FROM SHOP_INFO<!-- 안되냐? -->
+    <where>
+    	<if test='siName != null and siName != ""'>
+    		AND SI_NAME LIKE CONCAT('%',#{siName},'%')
+    	</if>
+    	<if test='siCode != null and siCode != ""'>
+    		AND SI_CODE LIKE CONCAT('%',#{siCode},'%')
+    	</if>
+    	<if test='siSupplier != null and siSupplier != ""'>
+    		AND SI_SUPPLIER LIKE CONCAT('%',#{siSupplier},'%')
+    	</if>
+    </where>
+  </select>
+  
+  <select id="selectShopInfo" resultType="com.ezen.demo.vo.ShopInfoVO">
+    SELECT * FROM SHOP_INFO
+    WHERE SI_NUM=#{siNum}
+   	<if test='siName != null and siName != ""'>
+   		AND SI_NAME LIKE CONCAT('%',#{siName},'%')
+   	</if>
+   	<if test='siCode != null and siCode != ""'>
+   		AND SI_CODE LIKE CONCAT('%',#{siCode},'%')
+   	</if>
+   	<if test='siSupplier != null and siSupplier != ""'>
+   		AND SI_SUPPLIER LIKE CONCAT('%',#{siSupplier},'%')
+   	</if>
+  </select>
+  <insert id="insertShopInfo" parameterType="com.ezen.demo.vo.ShopInfoVO">
+  	INSERT INTO SHOP_INFO(
+  	SI_CODE, 
+  	SI_NAME, 
+  	SI_CATEGORY, 
+  	SI_STOCK, 
+  	SI_SUPPLIER, 
+  	<if test='siPrice !=0'>
+  	SI_PRICE, 
+  	</if>
+  	SI_ETC)
+	VALUES(
+	#{siCode},
+	#{siName},
+	#{siCategory},
+	#{siStock},
+	#{siSupplier},
+  	<if test='siPrice !=0'>
+	#{siPrice},
+	</if>
+	#{siEtc})
+  </insert>
+  <update id="updateShopInfo" parameterType="com.ezen.demo.vo.ShopInfoVO">
+	UPDATE SHOP_INFO
+	SET SI_NAME=#{siName},
+	SI_CATEGORY=#{siCategory},
+	SI_STOCK=#{siStock},
+	SI_SUPPLIER=#{siSupplier},
+	SI_PRICE=#{siPrice},
+	SI_ETC=#{siEtc}
+	WHERE SI_NUM=#{siNum}
+  </update>
+  <delete id="deleteShopInfo" > 
+  	DELETE FROM SHOP_INFO WHERE SI_NUM=#{siNum}
+  </delete>
+</mapper>
