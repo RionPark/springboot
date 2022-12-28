@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.demo.mapper.BoardInfoMapper">
+  <select id="selectBoardInfoList" resultType="com.ezen.demo.vo.BoardInfoVO">
+    SELECT * FROM BOARD_INFO
+    <where>
+    	<if test='biTitle != null and biTitle != ""'>
+    		AND BI_TITLE LIKE CONCAT('%',#{biTitle},'%')
+    	</if>
+    	<if test='biContent != null and biContent != ""'>
+    		AND BI_CONTENT LIKE CONCAT('%',#{biContent},'%')
+    	</if>
+    	<if test='biWriter != null and biWriter != ""'>
+    		AND BI_WRITER LIKE CONCAT('%',#{biWriter},'%')
+    	</if>
+    </where>
+  </select>
+  
+  <select id="selectBoardInfo" resultType="com.ezen.demo.vo.BoardInfoVO">
+    SELECT * FROM BOARD_INFO
+    WHERE BI_NUM=#{biNum}
+    	<if test='biTitle != null and biTitle != ""'>
+    		AND BI_TITLE LIKE CONCAT('%',#{biTitle},'%')
+    	</if>
+    	<if test='biContent != null and biContent != ""'>
+    		AND BI_CONTENT LIKE CONCAT('%',#{biContent},'%')
+    	</if>
+    	<if test='biWriter != null and biWriter != ""'>
+    		AND BI_WRITER LIKE CONCAT('%',#{biWriter},'%')
+    	</if>
+  </select>
+  <insert id="insertBoardInfo" parameterType="com.ezen.demo.vo.BoardInfoVO">
+  	INSERT INTO BOARD_INFO(
+  	BI_TITLE,
+  	BI_CONTENT,
+  	BI_WRITER)
+	VALUES(
+	#{biTitle},
+	#{biContent},
+	#{biWriter})
+  </insert>
+  <update id="updateBoardInfo" parameterType="com.ezen.demo.vo.BoardInfoVO">
+	UPDATE BOARD_INFO
+	SET BI_TITLE=#{biTitle},
+	BI_CONTENT=#{biContent},
+	BI_WRITER=#{biWriter},
+	MODDAT=now(),
+	BI_CNT=#{biCnt}
+	WHERE BI_NUM=#{biNum}
+  </update>
+  <delete id="deleteBoardInfo" > 
+  	DELETE FROM BOARD_INFO WHERE BI_NUM=#{biNum}
+  </delete>
+</mapper>
