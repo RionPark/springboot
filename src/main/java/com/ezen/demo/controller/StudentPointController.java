@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,12 +24,17 @@ public class StudentPointController {
 	@GetMapping("/student-points")
 	@ResponseBody
 	public List<StudentPointVO> getStudentPoints(@ModelAttribute StudentPointVO studentPoint) {
-		studentPoint.setSpName(" ");
 		return studentPointService.selectStudentPointList(studentPoint);
 	}
 	@PostMapping("/student-points")
 	@ResponseBody
 	public int insertStudentPoint(@RequestBody StudentPointVO studentPoint) {
 		return studentPointService.insertStudentPoint(studentPoint);
+	}
+	
+	@PatchMapping("/student-points/{spNum}")
+	@ResponseBody
+	public int updateStudentPoint(@RequestBody StudentPointVO studentPoint, @PathVariable("spNum") int spNum) {
+		return 1;
 	}
 }
