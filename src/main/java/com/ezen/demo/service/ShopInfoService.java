@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 import com.ezen.demo.mapper.ShopInfoMapper;
 import com.ezen.demo.vo.ShopInfoVO;
 
+
 @Service
-public class ShopInfoService {
+public class ShopInfoService{
 	@Autowired
 	private ShopInfoMapper shopInfoMapper;
 	

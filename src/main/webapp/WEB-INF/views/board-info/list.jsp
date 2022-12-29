@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h2>게시판</h2>
 ${boardInfoList}
 </body>
 </html>

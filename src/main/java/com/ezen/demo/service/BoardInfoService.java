@@ -9,7 +9,7 @@ import com.ezen.demo.mapper.BoardInfoMapper;
 import com.ezen.demo.vo.BoardInfoVO;
 
 @Service
-public class BoardInfoService {
+public class BoardInfoService{
 
 	@Autowired
 	private BoardInfoMapper boardInfoMapper;

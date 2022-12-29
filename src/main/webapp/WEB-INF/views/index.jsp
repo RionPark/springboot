@@ -10,5 +10,7 @@
 <img src="/resources/imgs/photo.jpg">
 안녕하세요.
 <a href="/shop-infos">상품목록</a>
+<a href="/board-infos">게시판</a>
+<a href="/views/board-info/list">list.jsp</a>
 </body>
 </html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.demo.mapper.StudentPointMapper">
+	<select id="selectStudentPointList" resultType="com.ezen.demo.vo.StudentPointVO">
+		SELECT SP_NUM, SP_NAME, SP_KOR_POINT, SP_ENG_POINT, SP_MATH_POINT, SP_PROFILE 
+		FROM STUDENT_POINT
+		<where>
+			<if test='spName != null and spName!=""'>
+				AND SP_NAME like CONCAT('%',#{spName},'%')
+			</if>
+		</where>
+	</select>
+	<select id="selectStudentPoint" resultType="com.ezen.demo.vo.StudentPointVO">
+		SELECT SP_NUM, SP_KOR_POINT, SP_ENG_POINT, SP_MATH_POINT, SP_PROFILE 
+		FROM STUDENT_POINT
+		WHERE SP_NUM=#{spNum} 
+	</select>
+	<insert id="insertStudentPoint" parameterType="com.ezen.demo.vo.StudentPointVO">
+		INSERT INTO STUDENT_POINT
+		(SP_NAME, SP_KOR_POINT, SP_ENG_POINT, SP_MATH_POINT, SP_PROFILE)
+		VALUES(#{spName},#{spKorPoint},#{spEngPoint},#{spMathPoint},#{spProfile})
+	</insert>
+	<update id="updateStudentPoint" parameterType="com.ezen.demo.vo.StudentPointVO">
+		UPDATE STUDENT_POINT
+		SET SP_NAME=#{spName},
+		SP_KOR_POINT=#{spKorPoint},
+		SP_ENG_POINT=#{spEngPoint},
+		SP_MATH_POINT=#{spMathPoint},
+		SP_PROFILE=#{spProfile}
+		WHERE SP_NUM=#{spNum}
+	</update>
+	<delete id="deleteStudentPoint">
+		DELETE FROM STUDENT_POINT WHERE SP_NUM=#{spNum}
+	</delete>
+</mapper>

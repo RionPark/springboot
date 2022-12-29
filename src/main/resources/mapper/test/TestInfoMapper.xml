@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.demo.mapper.TestInfoMapper">
+	<select id="selectTestInfoList" resultType="com.ezen.demo.vo.TestInfoVO">
+		SELECT TI_NUM, TI_NAME, TI_AGE, TI_ADDRESS 
+		FROM TEST_INFO
+		<where>
+			<if test='tiName != null and tiName!=""'>
+				AND TI_NAME LIKE CONCAT('%',#{tiName},'%')
+			</if>
+		</where>
+	</select>
+</mapper>
