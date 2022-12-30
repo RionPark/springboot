@@ -15,7 +15,7 @@
 	<select id="selectStudentPoint" resultType="com.ezen.demo.vo.StudentPointVO">
 		SELECT SP_NUM, SP_KOR_POINT, SP_ENG_POINT, SP_MATH_POINT, SP_PROFILE 
 		FROM STUDENT_POINT
-		WHERE SP_NUM=#{spNum} 
+		WHERE SP_NUM=#{spnum} 
 	</select>
 	<insert id="insertStudentPoint" parameterType="com.ezen.demo.vo.StudentPointVO">
 		INSERT INTO STUDENT_POINT
@@ -29,9 +29,9 @@
 		SP_ENG_POINT=#{spEngPoint},
 		SP_MATH_POINT=#{spMathPoint},
 		SP_PROFILE=#{spProfile}
-		WHERE SP_NUM=#{spNum}
+		WHERE SP_NUM=#{spnum}
 	</update>
 	<delete id="deleteStudentPoint">
-		DELETE FROM STUDENT_POINT WHERE SP_NUM=#{spNum}
+		DELETE FROM STUDENT_POINT WHERE SP_NUM=#{spnum}
 	</delete>
 </mapper>
