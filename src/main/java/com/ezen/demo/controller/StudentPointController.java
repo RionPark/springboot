@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -35,6 +36,13 @@ public class StudentPointController {
 	@PatchMapping("/student-points/{spNum}")
 	@ResponseBody
 	public int updateStudentPoint(@RequestBody StudentPointVO studentPoint, @PathVariable("spNum") int spNum) {
-		return 1;
+		studentPoint.setSpNum(spNum);
+		return studentPointService.updateStudentPoint(studentPoint);
+	}
+	
+	@DeleteMapping("/student-points/{spNum}")
+	@ResponseBody
+	public int deleteStudentPoint(@PathVariable("spNum") int spNum) {
+		return studentPointService.deleteStudentPoint(spNum);
 	}
 }

@@ -10,5 +10,5 @@ public interface StudentPointMapper {
 	StudentPointVO selectStudentPoint(int spNum);
 	int insertStudentPoint(StudentPointVO studentPoint);
 	int updateStudentPoint(StudentPointVO studentPoint);
-	int deleteStudentPoint(StudentPointVO studentPoint); 
+	int deleteStudentPoint(int spNum); 
 }

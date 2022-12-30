@@ -25,7 +25,7 @@ public class StudentPointService {
 	public int updateStudentPoint(StudentPointVO studentPoint){
 		return studentPointMapper.updateStudentPoint(studentPoint);
 	}
-	public int deleteStudentPoint(StudentPointVO studentPoint){
-		return studentPointMapper.deleteStudentPoint(studentPoint);
+	public int deleteStudentPoint(int spNum){
+		return studentPointMapper.deleteStudentPoint(spNum);
 	}
 }
