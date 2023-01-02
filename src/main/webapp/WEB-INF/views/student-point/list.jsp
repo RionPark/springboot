@@ -8,6 +8,11 @@
 <link rel="icon" type="image/x-icon" href="/resources/imgs/favicon.png">
 </head>
 <body>
+&lt;div&gt;
+	<input type="number" id="spKorPoint1" value="0">~<input type="number" id="spKorPoint2" value="0"><br>
+	<input type="number" id="spEngPoint1" value="0">~<input type="number" id="spEngPoint2" value="0"><br>
+	<input type="number" id="spMathPoint1" value="0">~<input type="number" id="spMathPoint2" value="0"><br>
+	<input type="number" id="spSumPoint1" value="0">~<input type="number" id="spSumPoint2" value="0"><br>
 	<input type="text" id="spName" placeholder="이름"><button onclick="getStudentPoints()">검색</button><br>
 	<br>
 	<table border="1">
@@ -71,7 +76,16 @@ function toggleCheck(obj){
 	}
 }
 function getStudentPoints(){
-	fetch('/student-points?spName='+document.querySelector('#spName').value)
+	let param = '?spName=' + document.querySelector('#spName').value;
+	param += '&spKorPoint1=' + document.querySelector('#spKorPoint1').value;
+	param += '&spKorPoint2=' + document.querySelector('#spKorPoint2').value;
+	param += '&spEngPoint1=' + document.querySelector('#spEngPoint1').value;
+	param += '&spEngPoint2=' + document.querySelector('#spEngPoint2').value;
+	param += '&spMathPoint1=' + document.querySelector('#spMathPoint1').value;
+	param += '&spMathPoint2=' + document.querySelector('#spMathPoint2').value;
+	param += '&spSumPoint1=' + document.querySelector('#spSumPoint1').value;
+	param += '&spSumPoint2=' + document.querySelector('#spSumPoint2').value;
+	fetch('/student-points' + param)
 	.then(function(res){
 		/* console.log(res); */
 		/* console.log(res.json()); */

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<table border="1">
+	<tr>
+		<th>테스트</th>
+	</tr>
+	<tbody id="tBody"></tbody>
+</table>
+<button onclick="clickTest()">클릭!</button>
+<script>
+function clickTest(){
+	alert('click!!');
+}
+function debug1(){
+	let html = '';
+	for(let i=0;i<=10;i++){
+		html += '<tr>';
+		html += '<td>test' + i + '</td>';
+		html += '</tr>';
+	}
+	document.querySelector('#tBody').innerHTML = html;
+}
+window.onload = function(){
+	debug1();
+}
+</script>
+</body>
+</html>

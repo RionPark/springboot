@@ -55,7 +55,7 @@ public class StudentPointController {
 		return studentPointService.deleteStudentPoint(spNum);
 	}
 	
-	@DeleteMapping("/student-points1")
+	@DeleteMapping("/student-points")
 	@ResponseBody
 	public int deleteStudentPoints1(@RequestBody StudentPointVO studentPoint) {
 		return studentPointService.deleteStudentPoint1(studentPoint.getSpNums());

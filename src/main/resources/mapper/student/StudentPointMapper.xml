@@ -10,6 +10,30 @@
 			<if test='spName != null and spName!=""'>
 				AND SP_NAME like CONCAT('%',#{spName},'%')
 			</if>
+			<if test='spKorPoint1 !=0'>
+				AND SP_KOR_POINT &gt;= #{spKorPoint1}
+			</if>
+			<if test='spKorPoint2 !=0'>
+				AND SP_KOR_POINT &lt;= #{spKorPoint2}
+			</if>
+			<if test='spEngPoint1 !=0'>
+				AND SP_ENG_POINT &gt;= #{spEngPoint1}
+			</if>
+			<if test='spEngPoint2 !=0'>
+				AND SP_ENG_POINT &lt;= #{spEngPoint2}
+			</if>
+			<if test='spMathPoint1 !=0'>
+				AND SP_MATH_POINT &gt;= #{spMathPoint1}
+			</if>
+			<if test='spMathPoint2 !=0'>
+				AND SP_MATH_POINT &lt;= #{spMathPoint2}
+			</if>
+			<if test='spSumPoint1 !=0'>
+				AND (SP_KOR_POINT + SP_ENG_POINT + SP_MATH_POINT) &gt;= #{spSumPoint1}
+			</if>
+			<if test='spSumPoint2 !=0'>
+				AND (SP_KOR_POINT + SP_ENG_POINT + SP_MATH_POINT) &lt;= #{spSumPoint2}
+			</if>
 		</where>
 	</select>
 	<select id="selectStudentPoint" resultType="com.ezen.demo.vo.StudentPointVO">
