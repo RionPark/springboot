@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ezen.demo.service.StudentPointService;
 import com.ezen.demo.vo.StudentPointVO;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class StudentPointController {
 
 	@Autowired
@@ -50,5 +53,23 @@ public class StudentPointController {
 	@ResponseBody
 	public int deleteStudentPoint(@PathVariable("spNum") int spNum) {
 		return studentPointService.deleteStudentPoint(spNum);
+	}
+	
+	@DeleteMapping("/student-points1")
+	@ResponseBody
+	public int deleteStudentPoints1(@RequestBody StudentPointVO studentPoint) {
+		return studentPointService.deleteStudentPoint1(studentPoint.getSpNums());
+	}
+	
+	@DeleteMapping("/student-points2")
+	@ResponseBody
+	public int deleteStudentPoints2(@RequestBody StudentPointVO studentPoint) {
+		return studentPointService.deleteStudentPoint2(studentPoint.getSpNums());
+	}
+	
+	@DeleteMapping("/student-points3")
+	@ResponseBody
+	public int deleteStudentPoints3(@RequestBody StudentPointVO studentPoint) {
+		return studentPointService.deleteStudentPoints3(studentPoint.getSpNums());
 	}
 }

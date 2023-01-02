@@ -12,6 +12,7 @@
 	<br>
 	<table border="1">
 		<tr>
+			<th><input type="checkbox" name="allCheck" onclick="toggleCheck(this)"></th>
 			<th>번호</th>
 			<th>이름</th>
 			<th>국어점수</th>
@@ -24,8 +25,51 @@
 	</table>
 	<br>
 	<button onclick="location.href='/views/student-point/insert'">등록</button>
-	<button onclick="location.href='/views/student-point/update'">수정</button>
+	<button onclick="deleteStudentPoints(1)">삭제1</button>
+	<button onclick="deleteStudentPoints(2)">삭제2</button>
+	<button onclick="deleteStudentPoints(3)">삭제3</button>
 <script>
+function deleteStudentPoints(op){
+	const spNumObjs = document.querySelectorAll('input[name="spNums"]:checked');
+	const spNums = [];
+	for(const spNumObj of spNumObjs){
+		spNums.push(spNumObj.value);
+	}
+	console.log(spNums);
+	if(spNums.length===0){
+		alert('선택좀 해라');
+		return;
+	}
+	const param = {
+			spNums:spNums
+	}
+	fetch('/student-points' +op,{
+		method:'DELETE',
+		headers: {
+			 'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(param)
+	})
+	.then(function(res){
+		return res.json();
+	})
+	.then(function(data){
+		if(data>=1){
+			alert('삭제 성공!');
+			location.href='/views/student-point/list'
+		}
+	})
+}
+function toggleCheck(obj){
+	// input 태그의 name이 spNums인것들을 모두 찾아내서
+	//allCheck의 checked가 true이면 코두 체크가 되고
+	// 아니면 모두 미체크가 되는 로직을 구현해 보세요.
+	const spNums = document.querySelectorAll('input[name="spNums"]');
+
+	for(const spNum of spNums){
+		spNum.checked = obj.checked;
+	}
+}
 function getStudentPoints(){
 	fetch('/student-points?spName='+document.querySelector('#spName').value)
 	.then(function(res){
@@ -39,9 +83,10 @@ function getStudentPoints(){
 		for(let i=0;i<list.length;i++){
 			const studentPoint = list[i];
 			/* console.log(studentPoint); */
-			html += '<tr onclick="location.href=\'/views/student-point/view?spNum=' + studentPoint.spNum + '\'" style="cursor:pointer">';				
+			html += '<tr>';
+			html += '<td><input type="checkbox" name="spNums" value="' + studentPoint.spNum + '"></td>'
 			html += '<td>' + studentPoint.spNum + '</td>';
-			html += '<td>' + studentPoint.spName + '</td>';
+			html += '<td><a href ="/views/student-point/view?spNum=' + studentPoint.spNum + '">' + studentPoint.spName + '</a></td>';
 			html += '<td>' + studentPoint.spKorPoint + '</td>';
 			html += '<td>' + studentPoint.spEngPoint + '</td>';
 			html += '<td>' + studentPoint.spMathPoint + '</td>';

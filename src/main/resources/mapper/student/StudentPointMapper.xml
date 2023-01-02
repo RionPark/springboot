@@ -34,4 +34,25 @@
 	<delete id="deleteStudentPoint">
 		DELETE FROM STUDENT_POINT WHERE SP_NUM=#{spNum}
 	</delete>
-</mapper>
+	<delete id="deleteStudentPoints2">
+		DELETE FROM STUDENT_POINT 
+		<where>
+			<if test='spNums != null and spNums.size!=0'>
+				<foreach collection="spNums" item="spNum" separator="OR">
+					SP_NUM = #{spNum}
+				</foreach>
+			</if>
+		</where>
+	</delete>
+	<delete id="deleteStudentPoints3">
+		DELETE FROM STUDENT_POINT 
+		<where>
+			<if test='spNums != null and spNums.size!=0'>
+				SP_NUM IN 
+				<foreach collection="spNums" item="spNum" separator="," open="(" close=")">
+					#{spNum}
+				</foreach>
+			</if>
+		</where>
+	</delete>
+</mapper> 

@@ -28,4 +28,19 @@ public class StudentPointService {
 	public int deleteStudentPoint(int spNum){
 		return studentPointMapper.deleteStudentPoint(spNum);
 	}
+	
+	public int deleteStudentPoint1(List<Integer> spNums) {
+		int cnt = 0;
+		for(int spNum : spNums) {
+			cnt += studentPointMapper.deleteStudentPoint(spNum);
+		}
+		return cnt;
+	}
+	public int deleteStudentPoint2(List<Integer> spNums) {
+		return studentPointMapper.deleteStudentPoints2(spNums);
+	}
+	
+	public int deleteStudentPoints3(List<Integer> spNums) {
+		return studentPointMapper.deleteStudentPoints3(spNums);
+	}
 }
