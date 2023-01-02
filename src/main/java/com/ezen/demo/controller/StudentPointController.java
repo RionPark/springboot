@@ -27,6 +27,12 @@ public class StudentPointController {
 	public List<StudentPointVO> getStudentPoints(@ModelAttribute StudentPointVO studentPoint) {
 		return studentPointService.selectStudentPointList(studentPoint);
 	}
+	
+	@GetMapping("/student-points/{spNum}")
+	@ResponseBody
+	public StudentPointVO getStudentPoint(@PathVariable("spNum") int spNum) {
+		return studentPointService.selectStudentPoint(spNum);
+	}
 	@PostMapping("/student-points")
 	@ResponseBody
 	public int insertStudentPoint(@RequestBody StudentPointVO studentPoint) {
