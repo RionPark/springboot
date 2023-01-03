@@ -25,12 +25,15 @@ function login(){
 		body:JSON.stringify(param);
 	})
 	.then(function(res){
-		return res.json();
+		return res.text();
 	})
 	.then(function(data){
-		if(data && data.uiName){
-			alert(uiName + '님 로그인 완료!');
+		if(data ){
+			data = JSON.parse(data);
+			alert(data.uiName + '님 로그인 완료!');
 			location.href='/';
+		}else{
+			alert('아이디 비번을 확인해주세요.');
 		}
 	})
 }
