@@ -10,4 +10,12 @@ public class ServletInitializer extends SpringBootServletInitializer {
 		return application.sources(DemoApplication.class);
 	}
 
+	public static void main(String[] args) {
+		try {
+			Integer.parseInt("백십");
+		}catch(NumberFormatException nfe) {
+			System.out.println("야 숫자 써야지!!");
+		}
+		System.out.println("나 실행 안되남?");
+	}
 }

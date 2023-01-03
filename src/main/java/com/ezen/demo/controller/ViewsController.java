@@ -13,7 +13,6 @@ public class ViewsController {
 	public String home() {
 		return "views/index";
 	}
-	
 
 	@GetMapping("/views/**")
 	public void goPage() {

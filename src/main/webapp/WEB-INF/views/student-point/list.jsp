@@ -8,7 +8,6 @@
 <link rel="icon" type="image/x-icon" href="/resources/imgs/favicon.png">
 </head>
 <body>
-&lt;div&gt;
 	<input type="number" id="spKorPoint1" value="0">~<input type="number" id="spKorPoint2" value="0"><br>
 	<input type="number" id="spEngPoint1" value="0">~<input type="number" id="spEngPoint2" value="0"><br>
 	<input type="number" id="spMathPoint1" value="0">~<input type="number" id="spMathPoint2" value="0"><br>

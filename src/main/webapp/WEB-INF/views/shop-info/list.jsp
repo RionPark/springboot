@@ -15,7 +15,7 @@
 <button>조회</button>
 </form>
 <table border="1">
-	<tr>
+	<tr>	
 		<th>번호</th>
 		<th>제품명</th>
 		<th>카테고리</th>
