@@ -9,8 +9,10 @@ public class UserInfoVO {
 	private String uiName;
 	private String uiId;
 	private String uiPwd;
-	private String uiAddr;
+	private String uiZip;
+	private String uiAddr1;
+	private String uiAddr2;
 	private String uiEmail;
-	private String searchType;
-	private String searchText;
+	private String uiProfile;
+	private String uiProfileImgPath;
 }

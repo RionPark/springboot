@@ -3,18 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.demo.mapper.UserInfoMapper">
-  <select id="selectUserInfoList" resultType="com.ezen.demo.vo.UserInfoVO">
-    SELECT * FROM USER_INFO
-    <where>
-    	<if test='uiName != null and uiName != ""'>
-    		AND UI_NAME LIKE CONCAT('%',#{uiName},'%')
-    	</if>
-    	<if test='uiId != null and uiId != ""'>
-    		AND UI_ID LIKE CONCAT('%',#{uiId},'%')
-    	</if>
-    	<if test='uiAddr != null and uiAddr != ""'>
-    		AND UI_ADDR LIKE CONCAT('%',#{uiAddr},'%')
-    	</if>
-    </where>
-  </select>
+	<sql id="userInfoCols">
+		UI_NUM, UI_ID, UI_NAME, UI_PWD,
+		UI_ZIP, UI_ADDR1, UI_ADDR2, UI_PROFILE,
+		UI_EMAIL, UI_PROFILE_IMG_PATH
+	</sql>
+	<select id="selectUserInfoList"	resultType="com.ezen.demo.vo.UserInfoVO">
+		SELECT  
+		<include refid="userInfoCols"></include>
+		FROM USER_INFO
+		<where>
+			<if test='uiName != null and uiName != ""'>
+				AND UI_NAME LIKE CONCAT('%',#{uiName},'%')
+			</if>
+			<if test='uiId != null and uiId != ""'>
+				AND UI_ID LIKE CONCAT('%',#{uiId},'%')
+			</if>
+			<if test='uiAddr != null and uiAddr != ""'>
+				AND UI_ADDR LIKE CONCAT('%',#{uiAddr},'%')
+			</if>
+		</where>
+	</select>
+	<select id="selectUserInfoById"	resultType="com.ezen.demo.vo.UserInfoVO">
+		SELECT
+		<include refid="userInfoCols"></include> 
+		FROM USER_INFO
+		WHERE UI_ID = #{uiId}
+	</select>
 </mapper>

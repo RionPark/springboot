@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.demo.service.UserInfoService;
 import com.ezen.demo.vo.UserInfoVO;
@@ -29,4 +31,9 @@ public class UserInfoController {
 		return "views/user-info/list";
 	}
 	
+	@GetMapping("/user-infos/check/{uiId}")
+	@ResponseBody
+	public boolean existUserId(@PathVariable("uiId") String uiId) {
+		return userInfoService.existsUserId(uiId);
+	}
 }

@@ -16,4 +16,11 @@ public class UserInfoService {
 	public List<UserInfoVO> getUserInfos(UserInfoVO userInfo){
 		return userInfoMapper.selectUserInfoList(userInfo);
 	}
+	
+	public boolean existsUserId(String uiId) {
+		if(userInfoMapper.selectUserInfoById(uiId)==null) {
+			return false;
+		}
+		return true;
+	}
 }
