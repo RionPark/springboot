@@ -30,4 +30,22 @@
 		FROM USER_INFO
 		WHERE UI_ID = #{uiId}
 	</select>
+	<select id="selectUserInfoByIdAndPwd"	resultType="com.ezen.demo.vo.UserInfoVO">
+		SELECT
+		<include refid="userInfoCols"></include> 
+		FROM USER_INFO
+		WHERE UI_ID = #{uiId}
+		AND  UI_PWD = #{uiPwd}
+	</select>
+	
+	<insert id="insertUserInfo"> 
+		INSERT INTO USER_INFO(
+		UI_ID, UI_PWD, UI_NAME, 
+		UI_ADDR1, UI_ADDR2, UI_ZIP,
+		UI_EMAIL, UI_PROFILE
+		) 
+		VALUES(#{uiId},#{uiPwd},#{uiName},
+		#{uiAddr1},#{uiAddr2},#{uiZip},
+		#{uiEmail},#{uiProfile})
+	</insert>
 </mapper>
