@@ -22,7 +22,7 @@ function login(){
 		headers:{
 			'Content-Type':'application/json'
 		},
-		body:JSON.stringify(param);
+		body:JSON.stringify(param)
 	})
 	.then(function(res){
 		return res.text();
@@ -30,11 +30,15 @@ function login(){
 	.then(function(data){
 		if(data ){
 			data = JSON.parse(data);
-			alert(data.uiName + '님 로그인 완료!');
-			location.href='/';
-		}else{
-			alert('아이디 비번을 확인해주세요.');
+			if(data.uiName){
+				alert(data.uiName + '님 로그인 완료!');
+				location.href='/';
+				return;
+			}
 		}
+		
+		alert('아이디 비번을 확인해주세요.');
+
 	})
 }
 </script>

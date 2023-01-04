@@ -26,6 +26,6 @@ public class SHA256 {
 	}
 	
 	public static void main(String[] args) {
-		log.info("length=>{}", encode("123456111").length());
+		log.info("length=>{}", encode("test"));
 	}
 }

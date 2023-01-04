@@ -47,14 +47,15 @@ function deleteStudentPoints(op){
 	const param = {
 			spNums:spNums
 	}
-	fetch('/student-points' +op,{
+	let res = fetch('/student-points' +op,{
 		method:'DELETE',
 		headers: {
 			 'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(param)
-	})
-	.then(function(res){
+	});
+	
+	res.then(function(res){
 		return res.json();
 	})
 	.then(function(data){

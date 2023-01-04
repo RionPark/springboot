@@ -24,6 +24,14 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="selectUserInfo" resultType="com.ezen.demo.vo.UserInfoVO">
+		SELECT
+		<include refid="userInfoCols"></include> 
+		FROM USER_INFO
+		WHERE UI_NUm = #{uiNum}
+	</select>
+	
 	<select id="selectUserInfoById"	resultType="com.ezen.demo.vo.UserInfoVO">
 		SELECT
 		<include refid="userInfoCols"></include> 
@@ -48,4 +56,21 @@
 		#{uiAddr1},#{uiAddr2},#{uiZip},
 		#{uiEmail},#{uiProfile})
 	</insert>
+	
+	<update id="updateUserInfo"> 
+		UPDATE USER_INFO
+		SET UI_NAME=#{uiName},
+		UI_ZIP=#{uiZip},
+		UI_ADDR1=#{uiAddr1},
+		UI_ADDR2=#{uiAddr2},
+		UI_EMAIL=#{uiEmail},
+		UI_PROFILE=#{uiProfile}
+		WHERE UI_NUM=#{uiNum}
+	</update>
+	
+	<delete id="deleteUserInfo">
+		DELETE FROM USER_INFO
+		WHERE UI_NUM=#{uiNum}
+	</delete>
+	
 </mapper>

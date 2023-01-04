@@ -5,8 +5,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,6 +47,26 @@ public class UserInfoController {
 	@PostMapping("/user-infos")
 	public @ResponseBody int addUserInfo(@RequestBody UserInfoVO userInfo) {
 		return userInfoService.insertUserInfo(userInfo);
+	}
+	
+	@PostMapping("/user-infos/{uiNum}")
+	public @ResponseBody boolean checkPassword(@RequestBody UserInfoVO userInfo, @PathVariable("uiNum") int uiNum) {
+		return userInfoService.checkPassword(userInfo, uiNum);
+	}
+	
+	@PatchMapping("/user-infos/{uiNum}")
+	public @ResponseBody boolean modifyUserInfo(@RequestBody UserInfoVO userInfo, @PathVariable("uiNum") int uiNum, HttpSession session) {
+		UserInfoVO sessioUserInfo = (UserInfoVO) session.getAttribute("userInfo");
+		if(sessioUserInfo==null || sessioUserInfo.getUiNum()!=uiNum) {
+			throw new RuntimeException("잘못 정보 수정 입니다.");
+		}
+		userInfo.setUiNum(uiNum);
+		return userInfoService.updateUserInfo(userInfo);
+	}
+	
+	@DeleteMapping("/user-infos/{uiNum}")
+	public @ResponseBody boolean removeUserInfo(@RequestBody UserInfoVO userInfo, @PathVariable("uiNum") int uiNum) {
+		return userInfoService.removeUserInfo(userInfo, uiNum);
 	}
 	
 	@PostMapping("/login")

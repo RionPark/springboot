@@ -34,8 +34,37 @@ public class UserInfoService {
 		return userInfoMapper.insertUserInfo(userInfo);
 	}
 	
+	public boolean updateUserInfo(UserInfoVO userInfo) {
+		return userInfoMapper.updateUserInfo(userInfo)==1;
+	}
+	
 	public UserInfoVO login(UserInfoVO userInfo) {
 		userInfo.setUiPwd(SHA256.encode(userInfo.getUiPwd()));
 		return userInfoMapper.selectUserInfoByIdAndPwd(userInfo);		
 	}
+	
+	public boolean checkPassword(UserInfoVO userInfo, int uiNum) {
+		UserInfoVO tmpUserInfo = userInfoMapper.selectUserInfo(uiNum);
+		if(tmpUserInfo!=null) {
+			String uiPwd = userInfo.getUiPwd();
+			String encodePwd = SHA256.encode(uiPwd);
+			if(encodePwd.equals(tmpUserInfo.getUiPwd())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean removeUserInfo(UserInfoVO userInfo, int uiNum) {
+		if(checkPassword(userInfo,uiNum)) {
+			if(userInfoMapper.deleteUserInfo(uiNum)==1) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
+
+
+
+
+
