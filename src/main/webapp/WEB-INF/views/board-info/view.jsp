@@ -10,9 +10,23 @@
 <div id="rDiv"></div>
 <div id="btnDiv" style="display:none">
 	<button>수정</button>
-	<button>삭제</button>
+	<button onclick="deleteBoardInfo()">삭제</button>
 </div>
 <script>
+function deleteBoardInfo(){
+	fetch('/board-infos/${param.biNum}',{
+		method:'DELETE'
+	})
+	.then(function(res){
+		return res.json();
+	})
+	.then(function(data){
+		if(data===1){
+			alert('삭제 완료');
+			location.href='/views/board-info/list';
+		}
+	});
+}
 function getBoard(){
 	fetch('/board-infos/${param.biNum}')
 	.then(function(res){

@@ -17,6 +17,7 @@
 		FROM BOARD_INFO BI
 		INNER JOIN USER_INFO UI ON BI.UI_NUM = UI.UI_NUM
 		<where>
+			BI.BI_ACTIVE = 1
 			<if test='biTitle != null and biTitle != ""'>
 				AND BI_TITLE LIKE CONCAT('%',#{biTitle},'%')
 			</if>
