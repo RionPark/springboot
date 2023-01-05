@@ -9,7 +9,7 @@
 <body>
 <div id="rDiv"></div>
 <div id="btnDiv" style="display:none">
-	<button>수정</button>
+	<button onclick="location.href='/views/board-info/update?biNum=${param.biNum}'">수정</button>
 	<button onclick="deleteBoardInfo()">삭제</button>
 </div>
 <script>

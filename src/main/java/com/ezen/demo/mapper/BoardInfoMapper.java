@@ -10,4 +10,5 @@ public interface BoardInfoMapper {
 	BoardInfoVO selectBoardInfo(int biNum);
 	int insertBoardInfo(BoardInfoVO boardInfo);
 	int updateBoardInfoActive(int biNum);
+	int updateBoardInfo(BoardInfoVO boardInfo);
 }

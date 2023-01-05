@@ -6,10 +6,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,5 +51,12 @@ public class BoardInfoController {
 	@ResponseBody
 	public int deleteBoardInfo(@PathVariable int biNum) {
 		return boardInfoService.updateBoardInfoActive(biNum);
+	}
+	
+	@PatchMapping("/board-infos/{biNum}")
+	@ResponseBody
+	public int updateBoardInfo(@RequestBody BoardInfoVO boardInfo, @PathVariable int biNum) {
+		boardInfo.setBiNum(biNum);
+		return boardInfoService.updateBoardInfo(boardInfo);
 	}
 }

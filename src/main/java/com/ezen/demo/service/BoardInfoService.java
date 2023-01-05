@@ -24,8 +24,11 @@ public class BoardInfoService{
 	public BoardInfoVO getBoardInfo(int biNum) {
 		return boardInfoMapper.selectBoardInfo(biNum);
 	}
-	
+
 	public int updateBoardInfoActive(int biNum) {
 		return boardInfoMapper.updateBoardInfoActive(biNum);
+	}
+	public int updateBoardInfo(BoardInfoVO boardInfo) {
+		return boardInfoMapper.updateBoardInfo(boardInfo);
 	}
 }
