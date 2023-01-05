@@ -61,7 +61,7 @@ public class UserInfoController {
 			throw new RuntimeException("잘못 정보 수정 입니다.");
 		}
 		userInfo.setUiNum(uiNum);
-		return userInfoService.updateUserInfo(userInfo);
+		return userInfoService.updateUserInfo(userInfo, session);
 	}
 	
 	@DeleteMapping("/user-infos/{uiNum}")

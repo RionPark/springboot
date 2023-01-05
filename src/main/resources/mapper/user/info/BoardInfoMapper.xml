@@ -3,59 +3,51 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.demo.mapper.BoardInfoMapper">
-  <select id="selectBoardInfoList" resultType="com.ezen.demo.vo.BoardInfoVO">
-    SELECT * FROM BOARD_INFO
-    <where>
-    	<if test='biTitle != null and biTitle != ""'>
-    		AND BI_TITLE LIKE CONCAT('%',#{biTitle},'%')
-    	</if>
-    	<if test='biContent != null and biContent != ""'>
-    		AND BI_CONTENT LIKE CONCAT('%',#{biContent},'%')
-    	</if>
-    	<if test='biWriter != null and biWriter != ""'>
-    		AND BI_WRITER LIKE CONCAT('%',#{biWriter},'%')
-    	</if>
-    </where>
-  </select>
-  
-  <select id="selectBoardInfo" resultType="com.ezen.demo.vo.BoardInfoVO">
-    SELECT * FROM BOARD_INFO
-    WHERE BI_NUM=#{biNum}
-    	<if test='biTitle != null and biTitle != ""'>
-    		AND BI_TITLE LIKE CONCAT('%',#{biTitle},'%')
-    	</if>
-    	<if test='biContent != null and biContent != ""'>
-    		AND BI_CONTENT LIKE CONCAT('%',#{biContent},'%')
-    	</if>
-    	<if test='biWriter != null and biWriter != ""'>
-    		AND BI_WRITER LIKE CONCAT('%',#{biWriter},'%')
-    	</if>
-  </select>
-  <insert id="insertBoardInfo" parameterType="com.ezen.demo.vo.BoardInfoVO">
-  	INSERT INTO BOARD_INFO(
-  	BI_TITLE,
-  	BI_CONTENT,
-  	BI_WRITER)
-	VALUES(
-	#{biTitle},
-	#{biContent},
-	#{biWriter})
-  </insert>
-  <update id="updateBoardInfo" parameterType="com.ezen.demo.vo.BoardInfoVO">
-	UPDATE BOARD_INFO
-	SET BI_TITLE=#{biTitle},
-	BI_CONTENT=#{biContent},
-	BI_WRITER=#{biWriter},
-	MODDAT=now(),
-	BI_CNT=#{biCnt}
-	WHERE BI_NUM=#{biNum}
-  </update>
-  <update id="updateBoardInfoCnt" parameterType="com.ezen.demo.vo.BoardInfoVO">
-	UPDATE BOARD_INFO
-	SET BI_CNT = BI_CNT + 1
-	WHERE BI_NUM=#{biNum}
-  </update>
-  <delete id="deleteBoardInfo" > 
-  	DELETE FROM BOARD_INFO WHERE BI_NUM=#{biNum}
-  </delete>
+
+	<sql id="boardInfoCols">
+		BI.UI_NUM, BI.BI_NUM, BI.BI_TITLE, BI.BI_CONTENT, 
+		BI.BI_CREDAT, BI.BI_CRETIM, BI.BI_LMODAT, BI.BI_LMOTIM,
+		BI.BI_ACTIVE, BI.BI_CNT
+	</sql>
+	
+	<select id="selectBoardInfoList" resultType="com.ezen.demo.vo.BoardInfoVO">
+		SELECT
+		<include refid="boardInfoCols"></include>
+		, UI.UI_ID 
+		FROM BOARD_INFO BI
+		INNER JOIN USER_INFO UI ON BI.UI_NUM = UI.UI_NUM
+		<where>
+			<if test='biTitle != null and biTitle != ""'>
+				AND BI_TITLE LIKE CONCAT('%',#{biTitle},'%')
+			</if>
+			<if test='biContent != null and biContent != ""'>
+				AND BI_CONTENT LIKE CONCAT('%',#{biContent},'%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectBoardInfo" resultType="com.ezen.demo.vo.BoardInfoVO">
+		SELECT
+		<include refid="boardInfoCols"></include>
+		, UI.UI_ID 
+		FROM BOARD_INFO BI
+		INNER JOIN USER_INFO UI ON BI.UI_NUM = UI.UI_NUM
+		WHERE BI.BI_NUM = #{biNum}
+	</select>
+	<update id="updateBoardInfoActive">
+		UPDATE BOARD_INFO
+		SET BI_ACTIVE=0 
+		WHERE BI_NUM=#{biNum}
+	</update>
+	<insert id="insertBoardInfo">
+		INSERT INTO BOARD_INFO(
+		BI_TITLE, BI_CONTENT, BI_CREDAT, BI_CRETIM,
+		BI_LMODAT, BI_LMOTIM, BI_ACTIVE, BI_CNT,
+		UI_NUM)
+		VALUES(
+		#{biTitle},#{biContent},DATE_FORMAT(NOW(),'%Y%m%d'),DATE_FORMAT(NOW(),'%H%i%s'),
+		DATE_FORMAT(NOW(),'%Y%m%d'),DATE_FORMAT(NOW(),'%H%i%s'), 1, 0,
+		#{uiNum}
+		)
+	</insert>
 </mapper>

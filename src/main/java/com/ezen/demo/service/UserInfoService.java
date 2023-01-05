@@ -34,8 +34,13 @@ public class UserInfoService {
 		return userInfoMapper.insertUserInfo(userInfo);
 	}
 	
-	public boolean updateUserInfo(UserInfoVO userInfo) {
-		return userInfoMapper.updateUserInfo(userInfo)==1;
+	public boolean updateUserInfo(UserInfoVO userInfo, HttpSession session) {
+		if(userInfoMapper.updateUserInfo(userInfo)==1) {
+			UserInfoVO tmpUserInfo = userInfoMapper.selectUserInfo(userInfo.getUiNum());
+			session.setAttribute("userInfo", tmpUserInfo);
+			return true;
+		}
+		return false;
 	}
 	
 	public UserInfoVO login(UserInfoVO userInfo) {
@@ -63,8 +68,3 @@ public class UserInfoService {
 		return false;
 	}
 }
-
-
-
-
-
