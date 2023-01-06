@@ -34,9 +34,9 @@ public class SortTest2 {
 		for(int i=0;i<humans.length;i++) {
 			for(int j=i+1;j<humans.length;j++) {
 				if(humans[i].getAge()>humans[j].getAge()) {
-					int tmpAge = humans[i].getAge();
-					humans[i].setAge(humans[j].getAge());
-					humans[j].setAge(tmpAge);
+					Human tmpHuman = humans[i];
+					humans[i] = humans[j];
+					humans[j] = tmpHuman;
 				}
 			}
 		}
