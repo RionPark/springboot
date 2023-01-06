@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.demo.mapper.PapagoTranslateMapper">
+	<select id="selectPapagoTranslate" resultType="com.ezen.demo.vo.PapagoTranslateVO">
+		SELECT PT_NUM, PT_SOURCE, PT_TARGET, PT_TEXT, PT_RESULT
+		FROM PAPAGO_TRANSLATE
+		WHERE PT_SOURCE = #{ptSource} 
+		AND PT_TARGET = #{ptTarget} 
+		AND PT_TEXT = #{ptText} 
+	</select>
+	<insert id="insertPapagoTranslate" parameterType="com.ezen.demo.vo.PapagoTranslateVO">
+		INSERT INTO PAPAGO_TRANSLATE
+		( PT_SOURCE, PT_TARGET, PT_TEXT, PT_RESULT)
+		VALUES(#{ptSource},#{ptTarget},#{ptText},#{ptResult})
+	</insert>
+</mapper> 

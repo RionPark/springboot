@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ezen.demo.api.ApiPapagoTranslate;
+import com.ezen.demo.service.TranslateService;
 import com.ezen.demo.vo.PapagoParamVO;
 import com.ezen.demo.vo.PapagoVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -17,11 +17,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TranslateController {
 	@Autowired
-	private ApiPapagoTranslate apiPapagoTranslate;
+	private TranslateService translateService;
 
 	@PostMapping("/translate")
 	public PapagoVO translate(@RequestBody PapagoParamVO papago) throws JsonMappingException, JsonProcessingException {
-		return apiPapagoTranslate.translate(papago);
+		return translateService.translate(papago);
 	}
 	
 }
