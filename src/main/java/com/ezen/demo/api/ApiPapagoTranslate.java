@@ -10,12 +10,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.ezen.demo.vo.PapagoParamVO;
@@ -40,6 +42,7 @@ public class ApiPapagoTranslate {
 	private String method;
 	@Autowired
 	private ObjectMapper om;
+	private int cnt =1;
 
 	public PapagoVO translate(PapagoParamVO papagoParam) throws JsonMappingException, JsonProcessingException {
         String text;
@@ -54,6 +57,10 @@ public class ApiPapagoTranslate {
         requestHeaders.put("X-Naver-Client-Id", clientId);
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         String json = post(requestHeaders, papagoParam);
+        Map<String,Object> map = om.readValue(json, Map.class);
+        Map<String,Object> messageMap = (Map<String,Object>)map.get("message");
+        Map<String,Object> resultMap = (Map<String,Object>) messageMap.get("result");
+        resultMap.get("translatedText");
         return om.readValue(json, PapagoVO.class);
 	}
 
