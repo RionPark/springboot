@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.demo.mapper.BestsellerBookMapper">
+	<sql id="bestsellerBookCols">
+		NUM, IMG_PATH, TITLE, SUB_TITLE,
+		AUTHOR, PUBLISHING,PUBLISHING_DATE,PRICE,
+		URL,CREDAT
+	</sql>
+	
+	<select id="selectBestsellerBookList" resultType="com.ezen.demo.vo.BestsellerBookVO">
+		SELECT 
+		<include refid="bestsellerBookCols"/>
+		FROM BESTSELLER_BOOK
+		ORDER BY NUM
+	</select>
+	
+	<insert id="insertBestsellerBook">
+		INSERT INTO BESTSELLER_BOOK
+		(NUM, IMG_PATH, TITLE, SUB_TITLE,
+		AUTHOR, PUBLISHING,PUBLISHING_DATE,PRICE,
+		URL,CREDAT)
+		VALUES
+		<foreach collection="bestsellerBookList" item="bestsellerBook" separator=",">
+			(
+			#{bestsellerBook.num},#{bestsellerBook.imgPath},#{bestsellerBook.title},#{bestsellerBook.subTitle},
+			#{bestsellerBook.author},#{bestsellerBook.publishing},#{bestsellerBook.publishingDate},#{bestsellerBook.price},
+			#{bestsellerBook.url},DATE_FORMAT(NOW(),'%Y%m%d')
+			)
+		</foreach>
+	</insert>
+</mapper>
