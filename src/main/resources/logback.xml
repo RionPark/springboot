@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- Appenders -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>[%d{HH:mm:ss}] [%-4level] %logger.%method:%line - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/java-works/logs/Log.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/java-works/logs/Log.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>[%d{HH:mm:ss}] [%-4level] %logger.%method:%line - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<!--  com.ezen.demo 패키지 안에 모든 로그를 debug로 셋팅 -->
+	<logger name="com.ezen.demo" level="debug"/>
+	
+	<!--  jdbc 관련 모든 로그를 off -->
+	<logger name="jdbc" level="off"/>
+	<!--  jdbc sql문만 로그할지에 대한 여부 off -->
+	<logger name="jdbc.sqlonly" level="off"/>
+	<!-- 쿼리문 바인딩이후 로깅할지에 대한 여부 info -->
+	<logger name="jdbc.sqltiming" level="info"/>
+	<logger name="jdbc.audit" level="off"/>
+	<logger name="jdbc.resultset" level="off"/>
+	<!-- 실행결과가 result일 경우 결과값을 테이블 형태로 로깅할지에 대한 여부 debug -->
+	<logger name="jdbc.resultsettable" level="debug"/> 
+	<!-- db connection 연결될때 끊었을때 로깅 여부 off -->
+	<logger name="jdbc.connection" level="off"/>
+	
+	<root level="info">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="FILE"/>
+	</root>
+
+</configuration>
