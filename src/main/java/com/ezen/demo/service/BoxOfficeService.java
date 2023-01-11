@@ -21,4 +21,8 @@ public class BoxOfficeService {
 	public int insertBoxOffice(List<BoxOfficeVO> boxOfficeList) {
 		return boxOfficeMapper.insertBoxOffices(boxOfficeList);
 	}
+	
+	public List<BoxOfficeVO> getBoxOffices(int cnt){
+		return apiBoxOffice.getBoxOfficeList(cnt);
+	}
 }
