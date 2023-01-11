@@ -1,5 +1,7 @@
 package com.ezen.demo;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -7,24 +9,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+
+
 @Data
-class PapagoVO{
-	private MessageVO message;
+class DataVO{
+	private DrinkVO drink; 
 }
+
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-class MessageVO{
-	private ResultVO result;
+class DrinkVO{
+	private List<CoffeeVO> list;
 }
 @Data
-class ResultVO{
-	private String srcLangType;
-	private String tarLangType;
-	private String translatedText;
-	private String engineType;
-	private String pivot;
-	private String dict;
-	private String tarDict;
+class CoffeeVO{
+	private String name;
+	private int price;
+	private String brand;
 }
 @Slf4j
 public class JSONTest {
@@ -32,23 +33,29 @@ public class JSONTest {
 	public static void main(String[] args) throws JsonMappingException, JsonProcessingException {
 		ObjectMapper om = new ObjectMapper();
 		String json = "{\r\n"
-				+ "    \"message\": {\r\n"
-				+ "        \"result\": {\r\n"
-				+ "            \"srcLangType\": \"ko\",\r\n"
-				+ "            \"tarLangType\": \"ru\",\r\n"
-				+ "            \"translatedText\": \"Вы поели?\",\r\n"
-				+ "            \"engineType\": \"N2MT\",\r\n"
-				+ "            \"pivot\": null,\r\n"
-				+ "            \"dict\": null,\r\n"
-				+ "            \"tarDict\": null\r\n"
-				+ "        },\r\n"
-				+ "        \"@type\": \"response\",\r\n"
-				+ "        \"@service\": \"naverservice.nmt.proxy\",\r\n"
-				+ "        \"@version\": \"1.0.0\"\r\n"
-				+ "    }\r\n"
+				+ "  \"drink\": {\r\n"
+				+ "    \"list\": [\r\n"
+				+ "      {\r\n"
+				+ "        \"name\": \"coffee\",\r\n"
+				+ "        \"price\": 2000,\r\n"
+				+ "        \"brand\": \"back\"\r\n"
+				+ "      },\r\n"
+				+ "      {\r\n"
+				+ "        \"name\": \"coffee\",\r\n"
+				+ "        \"price\": 5000,\r\n"
+				+ "        \"brand\": \"starbucks\"\r\n"
+				+ "      },\r\n"
+				+ "      {\r\n"
+				+ "        \"name\": \"coffee\",\r\n"
+				+ "        \"price\": 1700,\r\n"
+				+ "        \"brand\": \"venti\"\r\n"
+				+ "      }\r\n"
+				+ "    ],\r\n"
+				+ "    \"hotBrand\": \"back\",\r\n"
+				+ "    \"hotBrandAddress\": \"Seoul\"\r\n"
+				+ "  }\r\n"
 				+ "}";
-		PapagoVO papago = om.readValue(json, PapagoVO.class);
-		log.info("papago=>{}", papago);
-		log.info("결국 내가 원하는 값은 =>{}", papago.getMessage().getResult().getTranslatedText());
+		DataVO data = om.readValue(json, DataVO.class);
+		log.debug("data=>{}", data);
 	}
 }

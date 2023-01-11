@@ -1,25 +1,28 @@
 package com.ezen.demo.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BoxOfficeVO {
-	private String rnum;
-	private String rank;
+	private int rank;
 	private String movieNm;
 	private String movieCd;
-	private String rankInten;
+	private int rankInten;
 	private String rankOldAndNew;
 	private String openDt;
-	private String salesAmt;
-	private String salesShare;
-	private String salesInten;
-	private String salesChange;
-	private String salesAcc;
-	private String audiCnt;
-	private String audiInten;
-	private String audiChange;
-	private String audiAcc;
-	private String scrnCnt;
-	private String showCnt;
+	private long salesAmt;
+	private double salesShare;
+	private long salesInten;
+	private double salesChange;
+	private long salesAcc;
+	private int audiCnt;
+	private int audiInten;
+	private double audiChange;
+	private int audiAcc;
+	private int scrnCnt;
+	private int showCnt;
+	private String targetDt;
 }
