@@ -48,8 +48,7 @@ public class ApiBoxOffice {
 			Instant before = now.minus(Duration.ofDays(i));
 			Date date = Date.from(before);
 			String dateStr = sdf.format(date);
-			log.debug("dateStr=>{}", movieUrl+dateStr);
-			String json = abo.get(movieUrl);
+			String json = abo.get(movieUrl+dateStr);
 			log.debug("json=>{}",json);
 		}
 //        String json = get();
@@ -64,7 +63,7 @@ public class ApiBoxOffice {
         HttpURLConnection con = connect(url);
         
         try {
-            con.setRequestMethod("get");
+            con.setRequestMethod("GET");
             int responseCode = con.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 응답
                 return readBody(con.getInputStream());
